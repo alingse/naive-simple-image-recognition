@@ -1,3 +1,5 @@
-     
-     
-     http://www.inform.kz/captcha.jsp
+# 
+
+> www.inform.kz
+
+	http://www.inform.kz/captcha.jsp
