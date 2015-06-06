@@ -75,6 +75,7 @@ if __name__ == '__main__':
     resultfile_list = listdir(result_dir)#iterate through the test set
     for filenamestr in resultfile_list:
         split_save(result_dir,filenamestr,split_dir)
+    exit()
     #rename--it----
     splitfile_list = listdir(split_dir)
     for filenamestr in splitfile_list:

@@ -99,7 +99,8 @@ def splitimg(im):
     #类似直方图
     (ysList,yeList)=findColBorder(colCount)
     #print len(ysList),len(yeList)
-
+    new_ysList=[]
+    new_yeList=[]
     if len(ysList)>=6 and len(yeList)>=6:
         for m in range(len(ysList)):
             for i in range(0, row):
@@ -113,20 +114,23 @@ def splitimg(im):
                     else:
                         rowCount[i]+=1
             (rowStart,rowEnd)=findRowBorder(rowCount)
-            #if len(ysList)==7:
-            #    print rowEnd-rowStart+yeList[m]-ysList[m]
-            #    print 'error-split'
-            if (rowEnd-rowStart+yeList[m]-ysList[m])<15:
+            if len(ysList)==7:
+                print rowEnd-rowStart+yeList[m]-ysList[m]
+                print 'error-split'
+            if (rowEnd-rowStart+yeList[m]-ysList[m])<20:
                 continue
             #set zero
-            xsList.append(rowStart)
-            xeList.append(rowEnd)        
+            xsList.append(rowStart)            
+            xeList.append(rowEnd)
+            new_ysList.append(ysList[m])
+            new_yeList.append(yeList[m])
+            
     else:
         return (None,None,None,None)
     if len(xsList)!=6:
         print 'error-split'
         return (None,None,None,None)
-    return (xsList,xeList,ysList,yeList)            
+    return (xsList,xeList,new_ysList,new_yeList)            
     """
     图片分割
     """

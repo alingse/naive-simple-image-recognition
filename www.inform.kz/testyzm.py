@@ -1,6 +1,6 @@
 #coding=utf-8
 from os import listdir
-import webbrowser
+
 import yzm
 
 from getimg import get_imgdata
@@ -13,7 +13,7 @@ def main():
     for i in range(0):
         imgdata=get_imgdata()
         open('test.jpg','w').write(imgdata)
-        webbrowser.open('test.jpg')
+        #showimg('test.jpg').start()
         im=imgdata2img(imgdata)
         nim=dealimg2(im)
         #show_pixel(nim)
@@ -24,7 +24,6 @@ def main():
     testfile_list = listdir('test_data')
     for filenamei in testfile_list:
         fname=test_dir+filenamei
-        #showimg(fname).start()
         imgdata=open(fname,'r').read()
         im=imgdata2img(imgdata)
         nim=dealimg2(im)
@@ -34,7 +33,8 @@ def main():
         #result=yzmimgdata(nimgdata)
         #result=yzm(fname)
         print ''.join(result)
-        #raw_input()
+        showimg(fname).start()
+        raw_input()
 
 
 if __name__ == '__main__':
