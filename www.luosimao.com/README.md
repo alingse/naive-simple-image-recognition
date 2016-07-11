@@ -1,5 +1,5 @@
 # 
 
-> www.inform.kz
+> www.luosima.com
 
-	http://www.inform.kz/captcha.jsp
+ 	http://luosimao.com/captcha/?
