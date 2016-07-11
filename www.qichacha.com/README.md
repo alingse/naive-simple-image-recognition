@@ -1,6 +1,6 @@
 #这是最基本简单的一个
 ##
-###基于 K-means 算法 破解简单 验证码
+### 破解简单 验证码
 #### 介绍
 1. 图片
 	 
@@ -55,9 +55,10 @@
 	这三个可以用在程序中去 使用了
 
 
-
-yun xing yang li
+运行样例
+``
 python getimg.py
 python doimg.py
 python makeyzm.py
 python testyzm.py
+``
