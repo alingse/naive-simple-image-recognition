@@ -21,12 +21,14 @@
 
 
 ## 目录结构
-tree -d -L 1
+
+``tree -d -L 1 |awk '{print $0;print "";}'``
+
 .
 
 ├── e.boc.cn
 
-├── simple
+├── www.sccredit.gov.cn
 
 ├── www.inform.kz
 
