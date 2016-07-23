@@ -15,12 +15,12 @@ def split(binpath,splitpath):
         if file.startswith('.'):
             continue 
         img = Image.open('{}/{}'.format(binpath,file))
-        img = img.convert('L')
+        #img = img.convert('L')
         res_list = split_img(img)
 
         for i,res in enumerate(res_list):
             tp,_img = res
-            fname = '.'.join([file,str(i),'px'.join(map(str,tp)),'jpg'])
+            fname = '.'.join([file,str(i),'px'.join(map(str,tp)),'bmp'])
             _img.save('{}/{}'.format(splitpath,fname))
 
 if __name__ == '__main__':  

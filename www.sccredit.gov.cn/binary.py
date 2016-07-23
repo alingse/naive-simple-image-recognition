@@ -15,7 +15,7 @@ def binary(rawpath,binpath):
             continue 
         img = Image.open('{}/{}'.format(rawpath,file))
         bin_img = chg_img(img)
-        bin_img.save('{}/{}'.format(binpath,file))
+        bin_img.save('{}/{}.bmp'.format(binpath,file))
 
 
 if __name__ == '__main__':  

@@ -2,9 +2,10 @@
 #2015/04/24
 #author@alingse
 
-from __future__ import print_function
 
-from get_image import get_imgcontent 
+
+from get_image import get_imgcontent
+
 from requests import Session
 import argparse
 import time
