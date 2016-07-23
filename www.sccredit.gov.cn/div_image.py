@@ -10,7 +10,7 @@ from utils import split_list
 from utils import merge_indexs
 import sys
 
-split_kwargs = {'col_rate':0.7,'row_rate':0.4,'count':4}
+split_kwargs = dict(col_rate = 0.7,row_rate=0.4,count=4)
 
 
 def split_img(bin_img,col_rate=0.7,row_rate=0.4,count=None):
