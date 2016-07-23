@@ -8,6 +8,8 @@ import argparse
 import os
 
 from div_image import split_img
+from div_image import split_kwargs
+
 
 def split(binpath,splitpath):
     files = os.listdir(binpath)
@@ -16,7 +18,7 @@ def split(binpath,splitpath):
             continue 
         img = Image.open('{}/{}'.format(binpath,file))
         #img = img.convert('L')
-        res_list = split_img(img)
+        res_list = split_img(img,**split_kwargs)
 
         for i,res in enumerate(res_list):
             tp,_img = res

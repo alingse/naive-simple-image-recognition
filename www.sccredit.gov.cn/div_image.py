@@ -8,8 +8,9 @@ from utils import img2mat
 from utils import strip_list
 from utils import split_list
 from utils import merge_indexs
-
 import sys
+
+split_kwargs = {'col_rate':0.7,'row_rate':0.4,'count':4}
 
 
 def split_img(bin_img,col_rate=0.7,row_rate=0.4,count=None):
@@ -51,7 +52,6 @@ def split_mat(mat,col_rate=0.7,row_rate = 0.4, count=None):
         tp = (r1,r2,c1,c2)
         splits.append((tp,_mat))
     return splits
-
 
 #可能之后根据 merge 自动调整rate ？？
 #merge 在上层添加了，自动的逻辑，后面再写
