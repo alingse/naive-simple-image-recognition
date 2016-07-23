@@ -7,16 +7,17 @@
 from utils import img2mat
 from utils import strip_list
 from utils import split_list
+from utils import merge_indexs
 
 import sys
 
 
-def split_img(bin_img,col_rate=0.7,row_rate=0.4):
+def split_img(bin_img,col_rate=0.7,row_rate=0.4,count=None):
     
     mat = img2mat(bin_img)
     
     splits = []
-    res_list = split_mat(mat,col_rate=0.7,row_rate=0.4)
+    res_list = split_mat(mat,col_rate=col_rate,row_rate=row_rate,count=count)
     for res in res_list:
         tp,_ = res
         r1,r2,c1,c2 = tp
@@ -26,45 +27,38 @@ def split_img(bin_img,col_rate=0.7,row_rate=0.4):
     return splits
 
 
-def split_mat(mat,col_rate=0.7,row_rate = 0.4):
+def split_mat(mat,col_rate=0.7,row_rate = 0.4, count=None):
     #row,col = mat.shape
     #use merge later
     res_list = split_bycol(mat,rate=col_rate)
     
-    col_index = [res[0] for res in res_list]
+    col_indexs = [res[0] for res in res_list]
+    #add merge
+    if count != None:
+        col_indexs = merge_indexs(col_indexs,count)
+
 
     splits = []
-    for _index in col_index:
+    for _index in col_indexs:
         c1,c2 = _index
         _mat = mat[:,c1:c2]
         _res_list = split_bycol(_mat.transpose(),rate=row_rate)
-        row_index = [res[0] for res in _res_list]
-        #print row_index
-        #just pick first one,use merge later
-        r1,r2 = row_index[0]
+        row_indexs = [res[0] for res in _res_list]
+        #add merge
+        row_indexs = merge_indexs(row_indexs,1)
+        r1,r2 = row_indexs[0]
         _mat = _mat[r1:r2,:]
         tp = (r1,r2,c1,c2)
         splits.append((tp,_mat))
     return splits
 
 
-def merge_split(res_list,count):    
-    if len(res_list) == count:
-        return res_list
-    return res_list[:count]
-
-
+#可能之后根据 merge 自动调整rate ？？
+#merge 在上层添加了，自动的逻辑，后面再写
 #split by col
 #default rate is 70% avg 
 def split_bycol(mat,rate=0.7):
 
-    #以后再 添加，一步步写先，不考虑一次全搞定
-    '''
-    if type(cnt) != list:
-        cnt = [cnt]
-    min_cnt = min(cnt)
-    max_cnt = max(cnt)
-    '''
     row,col = mat.shape
 
     col_list = sum(mat)
@@ -81,7 +75,7 @@ def split_bycol(mat,rate=0.7):
 if __name__ == '__main__':
     from PIL import Image
     bin_img = Image.open(sys.argv[1])
-    res_list = split_img(bin_img,col_rate=0.7,row_rate=0.4)
+    res_list = split_img(bin_img,col_rate=0.7,row_rate=0.4,count=4)
     for res in res_list:
         tp,_img = res
         _img.save('test.'+'-'.join(map(str,tp))+'.jpg')

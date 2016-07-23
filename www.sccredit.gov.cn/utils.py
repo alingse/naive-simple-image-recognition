@@ -53,6 +53,7 @@ def split_list(elist,e):
 
     return splits
 
+#what if auto merge ???计算商还是统一性？
 #which is `close` and `small two`
 #策略是加了以后会怎样? 用迭代吗？
 #---  -- --   ---    ---- ----  --- --
