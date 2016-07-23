@@ -53,6 +53,30 @@ def split_list(elist,e):
 
     return splits
 
+#which is `close` and `small two`
+#策略是加了以后会怎样? 用迭代吗？
+#---  -- --   ---    ---- ----  --- --
+#[(7,10),(11,14),(19,27)....]
+#add closest and this is smallest
+_m_diff = lambda x,y:y[0] - x[1]
+_m_length = lambda x,y:y[1] - x[0]
+_m_diff_length = lambda x,y:(_m_diff(x,y),_m_length(x,y))
+_m_dl_cmpf = lambda dlx,dly: cmp(dlx[0],dly[0]) if dlx[0]!=dly[0] else cmp(dlx[1],dly[1])
+
+def merge_indexs(indexs,count):    
+    if len(indexs) <= count:
+        return indexs
+    size = len(indexs)
+    df_len = [_m_diff_length(indexs[i-1],indexs[i]) for i in range(1,size)]
+    temp = zip(df_len,range(size-1))
+    temp_sorted =sorted(temp,key=lambda x:x[0],cmp=_m_dl_cmpf)
+    _tmp = temp_sorted[0]
+    #here just select the first
+    i = _tmp[1]
+    _index = (indexs[i][0],indexs[i+1][1])
+    _indexs = indexs[:i] + [_index] + indexs[(i+2):]
+    return merge_indexs(_indexs,count)
+
 #print mat 
 def print_mat(mat,replace=lambda x:x,log=lambda x:print(x,end="")):
     row,col = mat.shape
@@ -65,8 +89,8 @@ def print_mat(mat,replace=lambda x:x,log=lambda x:print(x,end="")):
 
 
 if __name__ == '__main__':
-    alist = np.array([0,0,0,0,0,1,2,3,4,5,0,0,0,0,1,2,3,4,5,0,0,0,5,3,4,0,0,0],dtype=np.int)
-    alist = [0,0,0,0,0,1,2,3,4,5,0,0,0,0,1,2,3,4,5,0,0,0,5,3,4,0,0,0]
+    alist = np.array([0,0,0,0,0,1,2,3,4,5,0,0,0,0,1,2,3,4,5,0,0,0,5,3,4,0,3,4,0,0],dtype=np.int)
+    #alist = [0,0,0,0,0,1,2,3,4,5,0,0,0,0,1,2,3,4,5,0,0,0,5,3,4,0,4,3,1,0,0]
     result = strip_list(alist,0)
     tp,blist = result
     print(tp)
@@ -74,7 +98,11 @@ if __name__ == '__main__':
     result = split_list(alist,0)
     for res in result:
         tp,blist = res
-        print(tp,blist,type(blist))
+        print(tp,blist)
+    indexs = map(lambda res:res[0],filter(lambda res:res[1] != [],result))
+    print(indexs)
+    indexs = merge_indexs(indexs,3)
+    print(indexs)
     mat = np.arange(9,dtype=np.int).reshape((3,3))
     print_mat(mat)
 
