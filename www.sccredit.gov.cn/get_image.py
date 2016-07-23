@@ -18,10 +18,15 @@ headers = {
 }
 
 
-def get_imgcontent(session):
+def get_imgcontent(session,**kwargs):
     try:
-        r = session.get(url,headers=headers,timeout=3)
-        print(r.headers)
+        kwargs.update(
+            {
+                'headers':headers,
+                'timeout':3
+            })
+        r = session.get(url,**kwargs)
+        #print(r.headers)
         content = r.content
         return content
     except Exception as e:

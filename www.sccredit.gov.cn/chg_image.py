@@ -2,9 +2,7 @@
 #author@alingse
 
 from PIL import Image
-
-import argparse
-import os
+import sys
 
 halt = (145,135,125)
 
@@ -20,30 +18,13 @@ def chg_img(img):
                 nim.putpixel((i,j),255)
             else:
                 nim.putpixel((i,j),0)
-                
     return nim
 
 
-def main(rawpath,binpath):
-    files = os.listdir(rawpath)
-    for file in files:
-        if file.startswith('.'):
-            continue 
-        img = Image.open('{}/{}'.format(rawpath,file))
-        bin_img = chg_img(img)
-        bin_img.save('{}/{}'.format(binpath,file))
+if __name__ == '__main__':
+    testf = sys.argv[1]
+    img = Image.open(testf)
+    nim = chg_img(img)
+    nim.save(testf+'.chg.jpg')
+    pass
 
-
-if __name__ == '__main__':  
-    parser = argparse.ArgumentParser()
-    parser.add_argument('rawpath',nargs = '?',default = './raw_image',help='raw img save path')
-    parser.add_argument('binpath',nargs = '?',default='./bin_image',help='bin image save path')
-    args = parser.parse_args()
-
-    rawpath = os.path.abspath(args.rawpath)
-    binpath = os.path.abspath(args.binpath)
-    main(rawpath,binpath)
-
-    
-
-    
