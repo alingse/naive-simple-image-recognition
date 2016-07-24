@@ -139,14 +139,13 @@ def read_raw_img(raw_img):
 
 def read_mat(mat):
     res_list = split_mat(mat,**split_kwargs)
-    labels = []
+    result = []
     for res in res_list:
         tp,_mat = res
         #print_mat(_mat,replace=lambda x:' ' if x<200 else 'M')
         label,sim = classfiy(_mat)
-        labels.append((label,sim))
-    return labels
-
+        result.append((label,sim))
+    return result
 
 
 if __name__ == '__main__':    
