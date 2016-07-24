@@ -5,6 +5,7 @@
 from __future__ import print_function
 import numpy as np
 from PIL import Image
+from StringIO import StringIO
 
 def img2mat(img):
     col,row = img.size
@@ -15,8 +16,21 @@ def img2mat(img):
             mat[j][i] = p
     return mat
 
+
 def mat2img(mat):
     pass
+
+
+def content2img(content):
+    f = StringIO(content)
+    img = Image.open(f)
+    return img
+
+def img2content(img):
+    f = StringIO.StringIO()
+    img.save(f)
+    return f.getvalue()
+
 
 #like string strip
 def strip_list(elist,e):
