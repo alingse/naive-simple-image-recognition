@@ -4,6 +4,7 @@
 
 from PIL import Image
 import numpy as np
+from itertools import groupby
 
 from chg_image import chg_img
 from div_image import split_mat
@@ -11,6 +12,8 @@ from div_image import split_img
 from div_image import split_kwargs
 
 from utils import img2mat
+from utils import print_mat
+import argparse
 import os
 
 
@@ -85,41 +88,80 @@ def training(trainpath):
     global trainingData
     trainingData = (dataSet,labels)
  
+#目前使用欧式平方距离其他以后再说
+def distance(dataSet,matSet):
+    #diff
+    diffMat = matSet - dataSet
+    diffMat_sq = diffMat**2
+    distances = np.sqrt(diffMat_sq.sum(axis=1))
+    return distances
 
+
+# use what distance ?
 def classfiy(mat):
     global trainingData
     if trainingData == None:
         training(trainpath)
     dataSet,labels = trainingData
+    
     N,length = dataSet.shape
+
     m_array = mat2array(mat,length)
+    matSet = np.tile(m_array,(N,1))
 
-    #diff
-    diffMat = np.tile(m_array,(N,1)) - dataSet
-    #diffMat**2
+    distances = distance(dataSet,matSet)
+    #----耗时吗？
+    #相似性
+    sims = 1/(1+distances)
+    _get_label = lambda x:x[0]
+    _get_sim = lambda x:x[1]
+    _avg = lambda x:sum(x)*1.0/len(x)
+
+    label_sims = sorted(zip(labels,sims),key=_get_label)
+    #通过label 来group，相关性相加,求均值？
+    label_sims = groupby(label_sims,key=_get_label)
+    label_simsum = map(lambda y:(y[0],_avg(map(_get_sim,y[1]))),label_sims)
+    #按照相关性排序
+    label_simsum_sort = sorted(label_simsum,key=_get_sim,reverse=-1)
+    label,sim = label_simsum_sort[0]
+    #print(label,sim)
+    #print(label_simsum_sort)
+    return (label,sim)
 
 
+def read_raw_img(raw_img):
+    bin_img = chg_img(raw_img)
+    mat = img2mat(bin_img)
+    #print_mat(mat,replace=lambda x:' ' if x<200 else 'M')
+    result = read_mat(mat)
+    return result
 
-
-def read_img(img):
-    pass
 
 def read_mat(mat):
-    pass
-
-
-
-
-
-
+    res_list = split_mat(mat,**split_kwargs)
+    labels = []
+    for res in res_list:
+        tp,_mat = res
+        #print_mat(_mat,replace=lambda x:' ' if x<200 else 'M')
+        label,sim = classfiy(_mat)
+        labels.append((label,sim))
+    return labels
 
 
 
 if __name__ == '__main__':    
-    import sys
-    img = Image.open('./split_image/1000.jpg.bmp.0.4px16px6px13.bmp')
-    mat = img2mat(img)
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-c','--classfiy',action='store',help='give a split image ')
+    parser.add_argument('-r','--readraw',action='store',help='give a raw image')
+    args = parser.parse_args()
+    if args.classfiy != None:
 
-    training(trainpath)
+        img = Image.open(args.classfiy)
+        mat = img2mat(img)
+        result = classfiy(mat)
+        print(result)
 
-    classfiy(mat)
+    if args.readraw != None:
+        raw_img = Image.open(args.readraw)
+        labels = read_raw_img(raw_img)
+        print(labels)
