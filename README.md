@@ -4,11 +4,10 @@
 
 ### 目前
 
-1.现在这些都是简单的,直接二值化计算的
+1.现在这些都是简单的,直接二值化计算距离的
 
 2.没有自动测试环节（当然也因为 不太愿意去标注样本）
 
-3.代码不够优雅，不够清晰
 
 ### TODO
 
@@ -18,26 +17,23 @@
 
 3.希望以后多些方法多些难度的。
 
+4. [www.zhihu.com](https://www.zhihu.com/captcha.gif?r=1468295024123)即：![www.zhihu.com](https://www.zhihu.com/captcha.gif?r=1468295024123)
 
 
 ## 目录结构
 
-``tree -d -L 1 |awk '{print $0;print "";}'``
+`e.boc.cn`
 
-.
+`www.sccredit.gov.cn`  目前代码中**最标准，最简便**的一个了
 
-├── e.boc.cn
+`www.inform.kz`
 
-├── www.sccredit.gov.cn
+`www.k369.com`
 
-├── www.inform.kz
+`www.luosimao.com`
 
-├── www.k369.com
-
-├── www.luosimao.com
-
-└── www.qichacha.com
+`www.qichacha.com`
 
 
-
-6 directories
+## NOTE
+ 1. 旧有的项目暂时不会去更新更简洁的代码了，会在新项目中使用
