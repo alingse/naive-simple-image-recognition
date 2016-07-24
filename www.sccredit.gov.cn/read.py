@@ -5,6 +5,7 @@
 from PIL import Image
 import numpy as np
 from itertools import groupby
+import operator
 
 from chg_image import chg_img
 from div_image import split_mat
@@ -43,15 +44,8 @@ def load_train_mat_label(trainpath,files):
     return res_list
 
 
-def multiply_list(*args):
-    r = 1
-    for arg in args:
-        r *= arg
-    return r 
-
-
-def mat2array(mat,length):
-    mlen = multiply_list(*mat.shape)
+def mat2array(mat,length):    
+    mlen = reduce(operator.mul,mat.shape,1)
     _m_array = mat.reshape(mlen)
     if mlen > length:
         _m_array = _m_array[:length]
