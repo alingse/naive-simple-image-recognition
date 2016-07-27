@@ -5,6 +5,7 @@
 from PIL import Image
 import numpy as np
 from itertools import groupby
+from operator import itemgetter
 import operator
 
 from chg_image import chg_img
@@ -107,8 +108,8 @@ def classfiy(mat):
     #----耗时吗？
     #相似性
     sims = 1/(1+distances)
-    _get_label = lambda x:x[0]
-    _get_sim = lambda x:x[1]
+    _get_label = itemgetter(0)
+    _get_sim = itemgetter(1)
     _avg = lambda x:sum(x)*1.0/len(x)
 
     label_sims = sorted(zip(labels,sims),key=_get_label)
