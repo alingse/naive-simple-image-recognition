@@ -2,38 +2,35 @@
 
 ## 识别验证码
 
+基本流程参考 [base](./base)
+
 ### 目前
 
-1.现在这些都是简单的,直接二值化计算距离的
-
-2.没有自动测试环节（当然也因为 不太愿意去标注样本）
-
+1. 简单的验证码, 直接二值化计算距离的
 
 ### TODO
 
-1.有一些其他的项目，以后慢慢搬上来
+1. 增加数据评估(原始数据一半训练，一半测试)
 
-2.代码，结构都优化一下，至少标注的一半训练，一半测试。
+2.希望以后多些方法多些难度的。
 
-3.希望以后多些方法多些难度的。
-
-4. [www.zhihu.com](https://www.zhihu.com/captcha.gif?r=1468295024123)即：![www.zhihu.com](https://www.zhihu.com/captcha.gif?r=1468295024123)
+3. [www.zhihu.com](https://www.zhihu.com/captcha.gif?r=1468295024123)即：![www.zhihu.com](https://www.zhihu.com/captcha.gif?r=1468295024123)
 
 
 ## 目录结构
 
-`e.boc.cn`
+- `base` 模板(目前最优化的代码)
 
-`www.sccredit.gov.cn`  目前代码中**最标准，最简便**的一个了
+- `e.boc.cn` 中银易商门户
 
-`www.inform.kz`
+- `shixin.court.gov.cn` 中国执行信息公开网
 
-`www.k369.com`
+- `www.sccredit.gov.cn` 四川信用网
 
-`www.luosimao.com`
+- `www.inform.kz` 哈萨克网站论坛
 
-`www.qichacha.com`
+- `www.k369.com`
 
+- `www.luosimao.com` Luosimao(短信)
 
-## NOTE
- 1. 旧有的项目暂时不会去更新更简洁的代码了，会在新项目中使用
+- `www.qichacha.com` 企查查

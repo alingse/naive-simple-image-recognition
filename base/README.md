@@ -60,5 +60,6 @@
   from verify.py import read_img
   from verify.py import read_content
     
-  result = read_img(img)
+  result = read_img(img)  
+  [('6', 1.0), ('6', 1.0), ('4', 0.66796875), ('6', 1.0)]
   ```
