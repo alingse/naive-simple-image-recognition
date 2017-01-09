@@ -12,7 +12,7 @@
 
 1. 增加数据评估(原始数据一半训练，一半测试)
 
-2.希望以后多些方法多些难度的。
+2. 希望以后多些方法多些难度的。
 
 3. [www.zhihu.com](https://www.zhihu.com/captcha.gif?r=1468295024123)即：![www.zhihu.com](https://www.zhihu.com/captcha.gif?r=1468295024123)
 
