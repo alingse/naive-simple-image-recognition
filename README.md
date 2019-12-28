@@ -21,12 +21,6 @@
 
 - `base` 模板(目前最优化的代码)
 
-- `boc`
-
-- `shixin`
-
-- `sccredit`
-
 - `www.inform.kz` 哈萨克网站论坛
 
 - `www.k369.com`
