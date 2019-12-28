@@ -1,4 +1,4 @@
-# verifycode recognize
+# simple and naive image verify code recognize
 
 ## 识别验证码
 
@@ -21,11 +21,11 @@
 
 - `base` 模板(目前最优化的代码)
 
-- `e.boc.cn` 中银易商门户
+- `boc`
 
-- `shixin.court.gov.cn` 中国执行信息公开网
+- `shixin`
 
-- `www.sccredit.gov.cn` 四川信用网
+- `sccredit`
 
 - `www.inform.kz` 哈萨克网站论坛
 
