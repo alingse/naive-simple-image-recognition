@@ -3,7 +3,7 @@
 
 from requests import Session
 
-url = 'http://www.sccredit.gov.cn/getYzm.do'
+url = 'http://xyz/getYzm.do'
 
 headers = {
     "Accept-Language": "zh-CN,zh;q=0.8,en;q=0.6",
@@ -14,13 +14,13 @@ headers = {
     "Connection": "keep-alive",
     "Pragma": "no-cache",
     "Cache-Control": "no-cache",
-    "Referer": "http://www.sccredit.gov.cn/queryInfo.do?behavior=enterSearch&panel=corp"
+    "Referer": "http://xyz/queryInfo.do?behavior=enterSearch&panel=corp"
     }
 
 
 def gen_session():
     session = Session()
-    url = 'http://www.sccredit.gov.cn/queryInfo.do?behavior=enterSearch&panel=corp'
+    url = 'http://xyz/queryInfo.do?behavior=enterSearch&panel=corp'
     try:
         session.get(url, timeout=3)
         return session
